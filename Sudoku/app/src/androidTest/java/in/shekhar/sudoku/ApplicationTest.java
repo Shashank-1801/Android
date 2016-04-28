@@ -1,4 +1,4 @@
-package org.example.sudoku;
+package in.shekhar.sudoku;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
