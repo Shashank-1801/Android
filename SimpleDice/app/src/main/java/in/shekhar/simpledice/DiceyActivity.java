@@ -1,6 +1,8 @@
 package in.shekhar.simpledice;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +31,7 @@ public class DiceyActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.roll_button:
                 roll();
+                vibrate(50);
         }
     }
 
@@ -62,5 +65,11 @@ public class DiceyActivity extends AppCompatActivity implements View.OnClickList
             result_display.setText(R.string.error);
         }
 
+    }
+
+    private void vibrate(long milliSec){
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        Log.d(TAG,"vibrating the device for " + milliSec + " milli secs");
+        v.vibrate(milliSec);
     }
 }

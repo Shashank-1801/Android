@@ -23,16 +23,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/prev_value"
+            android:id="@+id/prevresult"
+            android:layout_gravity="center"
+            android:layout_weight="5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/init_value"
             android:id="@+id/result"
             android:layout_gravity="center"
-            android:layout_weight="1"/>
+            android:layout_weight="5" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/dice_roll"
             android:id="@+id/roll_button"
+            android:layout_weight="1"
             android:layout_gravity="center|bottom"/>
     </LinearLayout>
 </RelativeLayout>
