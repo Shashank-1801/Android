@@ -1,4 +1,4 @@
-package in.shekhar.simpledice;
+package in.shekhar.simpledice2;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

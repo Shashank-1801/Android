@@ -1,4 +1,4 @@
-package in.shekhar.simpledice;
+package in.shekhar.simpledice2;
 
 import org.junit.Test;
 

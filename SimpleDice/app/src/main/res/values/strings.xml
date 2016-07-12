@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SimpleDice</string>
-    <string name="app_version">2</string>
+    <string name="app_version">3</string>
     <string name="init_value">Start by clicking the button</string>
     <string name="prev_value"></string>
     <string name="value1">1</string>
