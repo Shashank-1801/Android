@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list
+    android:id="@+id/rollingAni"
+    android:oneshot="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/dice5" android:duration="50" />
+    <item android:drawable="@drawable/dice3" android:duration="50" />
+    <item android:drawable="@drawable/dice1" android:duration="50" />
+    <item android:drawable="@drawable/dice4" android:duration="50" />
+</animation-list>

@@ -11,4 +11,7 @@
     <string name="value6">6</string>
     <string name="error">"Hmm...Something went Wrong!!</string>
     <string name="dice_roll">Roll Dice</string>
+    <string name="rolling">"Rolling..."</string>
+    <string name="done">"Done"</string>
+    <string name="blank"></string>
 </resources>
