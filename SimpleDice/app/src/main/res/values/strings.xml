@@ -1,4 +1,5 @@
 <resources>
+    <string name="author">Shashank Shekhar</string>
     <string name="app_name">SimpleDice</string>
     <string name="app_version">3</string>
     <string name="init_value">Start by clicking the button</string>
@@ -14,4 +15,5 @@
     <string name="rolling">"Rolling..."</string>
     <string name="done">"Done"</string>
     <string name="blank"></string>
+    <string name="splashMsg">Created by Shashank Shekhar</string>
 </resources>

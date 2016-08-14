@@ -77,7 +77,6 @@ public class DiceyActivity extends AppCompatActivity implements View.OnClickList
         }else{
             dummy.setText(R.string.error);
         }
-
     }
 
     private void vibrate(long milliSec){
@@ -89,14 +88,5 @@ public class DiceyActivity extends AppCompatActivity implements View.OnClickList
     private void rolling(long milliSec){
         final TextView dummy = (TextView) findViewById(R.id.resultDummy);
         ImageView iv = (ImageView) findViewById(R.id.diceImage);
-
-//        dummy.setText(R.string.rolling);
-//        try {
-//            Thread.sleep(milliSec);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        dummy.setText(R.string.done);
-
     }
 }
