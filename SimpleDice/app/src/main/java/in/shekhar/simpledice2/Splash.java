@@ -14,8 +14,8 @@ public class Splash extends Activity {
     private final int SPLASH_DISPLAY_LENGTH = 1000;
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onCreate(Bundle b) {
+        super.onCreate(b);
         setContentView(R.layout.splash_screen);
 
         new Handler().postDelayed(new Runnable(){
