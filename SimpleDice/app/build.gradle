@@ -9,8 +9,8 @@ android {
         applicationId "in.shekhar.simpledice2"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 5
-        versionName '5'
+        versionCode 6
+        versionName 'Version 6 (3e44484a)'
     }
     buildTypes {
         release {
