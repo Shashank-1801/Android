@@ -5,97 +5,99 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:id="@+id/main_page"
     tools:context="in.shekhar.congress.MainPage">
-
-
-
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="40dp"
-        tools:context=".MainActivity">
+        android:orientation="vertical">
 
-        <TabHost
-            android:id="@+id/tabHost"
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:id="@+id/main_page"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true">
+            tools:context=".MainActivity">
 
-            <LinearLayout
+            <TabHost
+                android:id="@+id/tabHost"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true">
 
-                <TabWidget
-                    android:id="@android:id/tabs"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></TabWidget>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <FrameLayout
-                    android:id="@android:id/tabcontent"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:id="@+id/tab1"
+                    <TabWidget
+                        android:id="@android:id/tabs"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#ffc916"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"></TabWidget>
 
-                        <TextView
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/tab1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="This is tab 1" />
+                            android:background="#ffc916"
+                            android:orientation="vertical">
 
-                    </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="This is tab 1" />
 
-                    <LinearLayout
-                        android:id="@+id/tab2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#da8200"
-                        android:orientation="vertical">
+                        </LinearLayout>
 
-                        <TextView
+                        <LinearLayout
+                            android:id="@+id/tab2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="This is tab 2" />
-                    </LinearLayout>
+                            android:background="#da8200"
+                            android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/tab3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#5b89ff"
-                        android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="This is tab 2" />
+                        </LinearLayout>
 
-                        <TextView
+                        <LinearLayout
+                            android:id="@+id/tab3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="This is tab 3" />
-                    </LinearLayout>
-                </FrameLayout>
-            </LinearLayout>
-        </TabHost>
+                            android:background="#5b89ff"
+                            android:orientation="vertical">
 
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="This is tab 3" />
+                        </LinearLayout>
+                    </FrameLayout>
+                </LinearLayout>
+            </TabHost>
+
+        </LinearLayout>
     </LinearLayout>
-
 
 </android.support.design.widget.CoordinatorLayout>

@@ -17,7 +17,11 @@ import android.view.MenuItem;
 import android.widget.TabHost;
 
 public class MainPage extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Legislator.OnFragmentInteractionListener, Committee.OnFragmentInteractionListener, Bills.OnFragmentInteractionListener {
+        implements  NavigationView.OnNavigationItemSelectedListener,
+                    Legislator.OnFragmentInteractionListener,
+                    Committee.OnFragmentInteractionListener,
+                    Bills.OnFragmentInteractionListener,
+                    Favorites.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +48,21 @@ public class MainPage extends AppCompatActivity
         host.setup();
 
         //Tab 1
-        TabHost.TabSpec spec = host.newTabSpec("Tab One");
+        TabHost.TabSpec spec = host.newTabSpec("BY STATE");
         spec.setContent(R.id.tab1);
-        spec.setIndicator("Tab One");
+        spec.setIndicator("BY STATE");
         host.addTab(spec);
 
         //Tab 2
-        spec = host.newTabSpec("Tab Two");
+        spec = host.newTabSpec("HOUSE");
         spec.setContent(R.id.tab2);
-        spec.setIndicator("Tab Two");
+        spec.setIndicator("HOUSE");
         host.addTab(spec);
 
         //Tab 3
-        spec = host.newTabSpec("Tab Three");
+        spec = host.newTabSpec("SENATE");
         spec.setContent(R.id.tab3);
-        spec.setIndicator("Tab Three");
+        spec.setIndicator("SENATE");
         host.addTab(spec);
 
 
@@ -139,7 +143,7 @@ public class MainPage extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         Intent intent;
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         int id = item.getItemId();
 
         if (id == R.id.abt_me) {
@@ -147,6 +151,7 @@ public class MainPage extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.legs) {
             // Create new fragment and transaction
+            toolbar.setTitle("Legislators");
             Fragment newFragment = new Legislator();
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
@@ -164,15 +169,21 @@ public class MainPage extends AppCompatActivity
             transaction.replace(R.id.main_page, newFragment);
             transaction.addToBackStack(null);
             transaction.commit();
-
+            toolbar.setTitle("Bills");
         } else if (id == R.id.comm) {
             Fragment newFragment = new Committee();
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.replace(R.id.main_page, newFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            toolbar.setTitle("Committees");
         } else if (id == R.id.fav) {
-
+            Fragment newFragment = new Favorites();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.main_page, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+            toolbar.setTitle("Favorites");
         }
 
        // TextView tv = findViewById(R.id.house_main);
