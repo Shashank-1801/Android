@@ -72,6 +72,8 @@ public class Committee extends Fragment {
         TabHost host = (TabHost) view.findViewById(R.id.commiteesTabHost);
         host.setup();
 
+        AsyncTaskActivity ata;
+
         //Tab 1
         TabHost.TabSpec spec = host.newTabSpec("HOUSE");
         spec.setContent(R.id.tab1);
@@ -89,6 +91,20 @@ public class Committee extends Fragment {
         spec.setContent(R.id.tab3);
         spec.setIndicator("JOINT");
         host.addTab(spec);
+
+        // fetch data for house
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=comm_house", getActivity(), R.id.committeesHouse);
+        ata.execute();
+
+        // fetch data for senate
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=comm_senate", getActivity(), R.id.committeesSenate);
+        ata.execute();
+
+        // fetch data for joint
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=comm_joint", getActivity(), R.id.committeesJoint);
+        ata.execute();
+
+
 
         return view;
 

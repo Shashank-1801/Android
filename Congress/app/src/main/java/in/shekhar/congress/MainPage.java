@@ -48,6 +48,21 @@ public class MainPage extends AppCompatActivity
         transaction.commit();
 
 
+//        AsyncTaskActivity ata;
+//
+//        // fetch data for house
+//        ata = new AsyncTaskActivity(this, "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=comm_house", this, R.id.committeesHouse);
+//        ata.execute();
+//
+//        // fetch data for senate
+//        ata = new AsyncTaskActivity(this, "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=comm_senate", this, R.id.committeesSenate);
+//        ata.execute();
+//
+//        // fetch data for joint
+//        ata = new AsyncTaskActivity(this, "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=comm_joint", this, R.id.committeesJoint);
+//        ata.execute();
+//
+
     }
 
     @Override

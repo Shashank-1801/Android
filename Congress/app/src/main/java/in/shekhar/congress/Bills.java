@@ -71,6 +71,7 @@ public class Bills extends Fragment {
         TabHost host = (TabHost) view.findViewById(R.id.billsTabHost);
         host.setup();
 
+        AsyncTaskActivity ata;
 
         //Tab 1
         TabHost.TabSpec spec = host.newTabSpec("ACTIVE BILLS");
@@ -83,6 +84,15 @@ public class Bills extends Fragment {
         spec.setContent(R.id.tab2);
         spec.setIndicator("NEW BILLS");
         host.addTab(spec);
+
+        // fetch data for active bills
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=bills-active", getActivity(), R.id.billsActive);
+        ata.execute();
+
+        // fetch data for new bills
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=bills-new", getActivity(), R.id.billsNew);
+        ata.execute();
+
 
         return view;
     }

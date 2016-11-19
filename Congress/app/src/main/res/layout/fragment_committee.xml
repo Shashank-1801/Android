@@ -41,6 +41,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/committeesHouse"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="This is tab 1" />
@@ -55,6 +56,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/committeesSenate"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="This is tab 2" />
@@ -69,6 +71,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/committeesJoint"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="This is tab 3" />
