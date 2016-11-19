@@ -40,11 +40,12 @@
                             android:background="#e13b6d"
                             android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/legislatorsByState"
+                            <ListView
+                                android:id="@+id/legislatorsListViewByState"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="By State" />
+                                android:layout_height="match_parent">
+
+                            </ListView>
 
                         </LinearLayout>
 
@@ -55,11 +56,12 @@
                             android:background="#da3280"
                             android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/legislatorsHouse"
+                            <ListView
+                                android:id="@+id/legislatorsListViewHouse"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="This is tab 2" />
+                                android:layout_height="match_parent">
+
+                            </ListView>
                         </LinearLayout>
 
                         <LinearLayout
@@ -69,11 +71,12 @@
                             android:background="#dc5046"
                             android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/legislatorsSenate"
+                            <ListView
+                                android:id="@+id/legislatorsListViewSenate"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="This is tab 3" />
+                                android:layout_height="match_parent">
+
+                            </ListView>
                         </LinearLayout>
                     </FrameLayout>
                 </LinearLayout>
