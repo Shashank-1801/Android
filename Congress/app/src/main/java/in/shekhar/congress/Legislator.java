@@ -1,12 +1,13 @@
 package in.shekhar.congress;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TabHost;
 
 
 /**
@@ -55,7 +56,7 @@ public class Legislator extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //legis
-
+        // tabs here
 
     }
 
@@ -63,7 +64,46 @@ public class Legislator extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_legislator, container, false);
+        View view = inflater.inflate(R.layout.fragment_legislator, container, false);
+
+
+        TabHost host = (TabHost) view.findViewById(R.id.legislatorsTabHost);
+        host.setup();
+
+        AsyncTaskActivity ata;
+
+        //Tab 1
+        TabHost.TabSpec spec = host.newTabSpec("BY STATE");
+        spec.setContent(R.id.tab1);
+        spec.setIndicator("BY STATE");
+        host.addTab(spec);
+
+        //Tab 2
+        spec = host.newTabSpec("HOUSE");
+        spec.setContent(R.id.tab2);
+        spec.setIndicator("HOUSE");
+        host.addTab(spec);
+
+        //Tab 3
+        spec = host.newTabSpec("SENATE");
+        spec.setContent(R.id.tab3);
+        spec.setIndicator("SENATE");
+        host.addTab(spec);
+
+        // fetch data for all legislators
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-all", getActivity(), R.id.legislatorsByState);
+        ata.execute();
+
+        // fetch data for legislators house
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-house", getActivity(), R.id.legislatorsHouse);
+        ata.execute();
+
+        // fetch data for legislators senate
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-senate", getActivity(), R.id.legislatorsSenate);
+        ata.execute();
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TabHost;
 
 
 /**
@@ -64,7 +65,31 @@ public class Favorites extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorites, container, false);
+        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+
+
+        TabHost host = (TabHost) view.findViewById(R.id.favoritesTabHost);
+        host.setup();
+
+        //Tab 1
+        TabHost.TabSpec spec = host.newTabSpec("LEGISLATORS");
+        spec.setContent(R.id.tab1);
+        spec.setIndicator("LEGISLATORS");
+        host.addTab(spec);
+
+        //Tab 2
+        spec = host.newTabSpec("BILLS");
+        spec.setContent(R.id.tab2);
+        spec.setIndicator("BILLS");
+        host.addTab(spec);
+
+        //Tab 3
+        spec = host.newTabSpec("COMMITTEES");
+        spec.setContent(R.id.tab3);
+        spec.setIndicator("COMMITTEES");
+        host.addTab(spec);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

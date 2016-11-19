@@ -5,12 +5,81 @@
     android:id="@+id/legislators"
     tools:context="in.shekhar.congress.Legislator">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/legis"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        android:background="#c24646"/>
+       <LinearLayout
+            android:id="@+id/legislators_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity">
+
+            <TabHost
+                android:id="@+id/legislatorsTabHost"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"></TabWidget>
+
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/tab1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#e13b6d"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/legislatorsByState"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="By State" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/tab2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#da3280"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/legislatorsHouse"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="This is tab 2" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/tab3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#dc5046"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/legislatorsSenate"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="This is tab 3" />
+                        </LinearLayout>
+                    </FrameLayout>
+                </LinearLayout>
+            </TabHost>
+
+        </LinearLayout>
+
 
 </FrameLayout>
