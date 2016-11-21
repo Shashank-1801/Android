@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
 
+import java.util.LinkedHashMap;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -91,17 +93,19 @@ public class Legislator extends Fragment {
         host.addTab(spec);
 
         // fetch data for all legislators
-        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-all", getActivity(), R.id.legislatorsListViewByState);
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-all", getActivity(), R.id.legislatorsListViewByState, "Legislators");
         ata.execute();
 
         // fetch data for legislators house
-        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-house", getActivity(), R.id.legislatorsListViewHouse);
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-house", getActivity(), R.id.legislatorsListViewHouse, "Legislators");
         ata.execute();
 
         // fetch data for legislators senate
-        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-senate", getActivity(), R.id.legislatorsListViewSenate);
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-senate", getActivity(), R.id.legislatorsListViewSenate, "Legislators");
         ata.execute();
 
+//        ListView fruitList = (ListView)   getActivity().findViewById(R.id.Legis)
+//        fruitList.setSelection(mapIndex.get(selectedIndex.getText()));
 
         return view;
     }
@@ -143,5 +147,16 @@ public class Legislator extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void getIndexList(String[] fruits) {
+        LinkedHashMap<String, Integer> mapIndex = new LinkedHashMap<String, Integer>();
+        for (int i = 0; i < fruits.length; i++) {
+            String fruit = fruits[i];
+            String index = fruit.substring(0, 1);
+
+            if (mapIndex.get(index) == null)
+                mapIndex.put(index, i);
+        }
     }
 }

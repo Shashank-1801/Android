@@ -1,8 +1,7 @@
 package in.shekhar.congress;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 public class AboutMe extends AppCompatActivity {
@@ -16,11 +15,6 @@ public class AboutMe extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                this.finish();
-//                return true;
-//        }
         this.finish();
         return false;
     }

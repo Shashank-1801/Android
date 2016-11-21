@@ -40,11 +40,12 @@
                         android:background="#3be188"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/committeesHouse"
+                        <ListView
+                            android:id="@+id/committeesListViewHouse"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="This is tab 1" />
+                            android:layout_height="match_parent">
+
+                        </ListView>
 
                     </LinearLayout>
 
@@ -55,11 +56,13 @@
                         android:background="#0d580f"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/committeesSenate"
+                        <ListView
+                            android:id="@+id/committeesListViewSeante"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="This is tab 2" />
+                            android:layout_height="match_parent">
+
+                        </ListView>
+
                     </LinearLayout>
 
 
@@ -70,11 +73,13 @@
                         android:background="#84c45c"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/committeesJoint"
+                        <ListView
+                            android:id="@+id/committeesListViewJoint"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="This is tab 3" />
+                            android:layout_height="match_parent">
+
+                        </ListView>
+
                     </LinearLayout>
 
 

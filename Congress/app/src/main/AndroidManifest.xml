@@ -21,6 +21,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".AboutMe" />
+        <activity
+            android:name=".DetailsPage"
+            android:label="@string/title_activity_details_page"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

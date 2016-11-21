@@ -93,15 +93,15 @@ public class Committee extends Fragment {
         host.addTab(spec);
 
         // fetch data for house
-        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=comm_house", getActivity(), R.id.committeesHouse);
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=comm_house", getActivity(), R.id.committeesListViewHouse, "Committees");
         ata.execute();
 
         // fetch data for senate
-        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=comm_senate", getActivity(), R.id.committeesSenate);
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=comm_senate", getActivity(), R.id.committeesListViewSeante, "Committees");
         ata.execute();
 
         // fetch data for joint
-        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=comm_joint", getActivity(), R.id.committeesJoint);
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=comm_joint", getActivity(), R.id.committeesListViewJoint, "Committees");
         ata.execute();
 
 
