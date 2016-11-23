@@ -61,44 +61,59 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
         super.onPostExecute(strings);
         ArrayList<String> list = null;
         try {
-            JSONObject jsonString = new JSONObject(strings);
-            Log.d("", jsonString.toString());
-            JSONArray jArray = jsonString.getJSONArray("results");
-            list = new ArrayList<>();
-            for(int i = 0; i < jArray.length(); i++){
-                list.add(jArray.getString(i));
-            }
 
-            ListView lv = (ListView) activity.findViewById(idOfElement);
-            ArrayAdapter adapter = new ArrayAdapter<String>(mContext,
-                    android.R.layout.simple_list_item_1, list);
-
-            lv.setAdapter(adapter);
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position,
-                                        long id) {
-
-                    String item = ((TextView)view).getText().toString();
-                    Toast.makeText(mContext, item, Toast.LENGTH_LONG).show();
-
-                    Intent details;
-                    details = new Intent(activity , DetailsPage.class);
-                    String title = null;
-                    if(source.equalsIgnoreCase("Legislators")){
-                        title = "Legislators Info";
-                    }else if(source.equalsIgnoreCase("Committees")){
-                        title = "Committees Info";
-                    }else{
-                        title = "Bills Info";
-                    }
-                    details.putExtra("info", item);
-                    details.putExtra("title", title);
-                    //details.putExtra("image", getImage());
-                    activity.startActivity(details);
-
+            if(source.equalsIgnoreCase("Bills")){
+                Log.d("","List View for Bills populating...");
+                JSONObject jsonString = new JSONObject(strings);
+                JSONArray jArray = jsonString.getJSONArray("results");
+                list = new ArrayList<>();
+                for (int i = 0; i < jArray.length(); i++) {
+                    list.add(jArray.getString(i));
                 }
-            });
+                ListView lv = (ListView) activity.findViewById(idOfElement);
+                BillsAdapter billsAdapter = new BillsAdapter(activity, list.toArray(new String[0]));
+                lv.setAdapter(billsAdapter);
+                Log.d("","List View for Bills populated");
+            }else {
+                JSONObject jsonString = new JSONObject(strings);
+                Log.d("", jsonString.toString());
+                JSONArray jArray = jsonString.getJSONArray("results");
+                list = new ArrayList<>();
+                for (int i = 0; i < jArray.length(); i++) {
+                    list.add(jArray.getString(i));
+                }
+
+                ListView lv = (ListView) activity.findViewById(idOfElement);
+                ArrayAdapter adapter = new ArrayAdapter<String>(mContext,
+                        android.R.layout.simple_list_item_1, list);
+
+                lv.setAdapter(adapter);
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position,
+                                            long id) {
+
+                        String item = ((TextView) view).getText().toString();
+                        Toast.makeText(mContext, item, Toast.LENGTH_SHORT).show();
+
+                        Intent details;
+                        details = new Intent(activity, DetailsPage.class);
+                        String title = null;
+                        if (source.equalsIgnoreCase("Legislators")) {
+                            title = "Legislators Info";
+                        } else if (source.equalsIgnoreCase("Committees")) {
+                            title = "Committees Info";
+                        } else {
+                            title = "Bills Info";
+                        }
+                        details.putExtra("info", item);
+                        details.putExtra("title", title);
+                        //details.putExtra("image", getImage());
+                        activity.startActivity(details);
+
+                    }
+                });
+            }
 
         }catch (Exception e){
             e.printStackTrace();

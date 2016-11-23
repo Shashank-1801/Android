@@ -39,10 +39,12 @@
                         android:background="#c0e13b"
                         android:orientation="vertical">
 
-                        <TextView
+                        <ListView
+                            android:id="@+id/favoritesListViewLegislators"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="This is tab 1" />
+                            android:layout_height="match_parent">
+
+                        </ListView>
 
                     </LinearLayout>
 
@@ -53,11 +55,12 @@
                         android:background="#d7d158"
                         android:orientation="vertical">
 
-                        <TextView
+                        <ListView
+                            android:id="@+id/favoritesListViewBills"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="This is tab 2" />
+                            android:layout_height="match_parent">
 
+                        </ListView>
 
                     </LinearLayout>
 
@@ -69,10 +72,12 @@
                         android:background="#c4865c"
                         android:orientation="vertical">
 
-                        <TextView
+                        <ListView
+                            android:id="@+id/favoritesListViewCommittees"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="This is tab 3" />
+                            android:layout_height="match_parent">
+
+                        </ListView>
                     </LinearLayout>
 
 

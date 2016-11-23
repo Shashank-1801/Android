@@ -1,13 +1,24 @@
 package in.shekhar.congress;
 
+import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TabHost;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -23,6 +34,9 @@ public class Favorites extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    SharedPreferences sp;
+    public static final String PREFSTRING = "CongressFav" ;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -88,6 +102,58 @@ public class Favorites extends Fragment {
         spec.setContent(R.id.tab3);
         spec.setIndicator("COMMITTEES");
         host.addTab(spec);
+
+        sp = getActivity().getSharedPreferences(PREFSTRING, Context.MODE_PRIVATE);
+        Map<String,?> mData = new HashMap<>();
+
+        mData = sp.getAll();
+
+        List<String> legislatorsList = new ArrayList<>();
+        List<String> billsList = new ArrayList<>();
+        List<String> committeesList = new ArrayList<>();
+
+        for(String key : mData.keySet()){
+            String dataString = (String) mData.get(key);
+            try {
+                JSONObject jsonObject = new JSONObject(dataString);
+                if(jsonObject.has("bioguide_id")) {
+                    String id = jsonObject.getString("bioguide_id");
+                    legislatorsList.add(dataString);
+                }else if(jsonObject.has("bill_id")){
+                    String id = jsonObject.getString("bill_id");
+                    committeesList.add(dataString);
+                }else if(jsonObject.has("committee_id")){
+                    String id = jsonObject.getString("committee_id");
+                    billsList.add(dataString);
+                }else{
+                    Log.d("", "Abey ye kahan se aa gaya : " + dataString);
+                }
+
+
+            }catch (org.json.JSONException je){
+
+            }
+        }
+
+        ArrayAdapter adapter;
+        // Legislators
+        adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_list_item_1, legislatorsList);
+        ListView legislatorsListView = (ListView) view.findViewById(R.id.favoritesListViewLegislators);
+        legislatorsListView.setAdapter(adapter);
+
+        // Bills
+        adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_list_item_1, billsList);
+        ListView billsListView = (ListView) view.findViewById(R.id.favoritesListViewBills);
+        billsListView.setAdapter(adapter);
+
+
+        // Committees
+        adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_list_item_1, committeesList);
+        ListView committeesListView = (ListView) view.findViewById(R.id.favoritesListViewCommittees);
+        committeesListView.setAdapter(adapter);
 
         return view;
     }

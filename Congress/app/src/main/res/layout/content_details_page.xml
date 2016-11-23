@@ -27,8 +27,8 @@
                     android:padding="15dp"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    app:srcCompat="@mipmap/f"
-                    android:id="@+id/fav"
+                    app:srcCompat="@mipmap/star_blank"
+                    android:id="@+id/favoritesIcon"
                     android:layout_alignParentTop="true"
                     android:layout_toStartOf="@+id/twitter" />
 
@@ -106,6 +106,7 @@
                     android:layout_height="wrap_content"
                     android:weightSum="1.0">
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_weight="0.48"
                         android:text="Name"
                         android:textStyle="bold"
@@ -126,6 +127,7 @@
                     android:layout_height="wrap_content"
                     android:weightSum="1.0">
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_weight="0.48"
                         android:text="Email"
                         android:textStyle="bold"
@@ -145,6 +147,7 @@
                     android:layout_height="wrap_content"
                     android:weightSum="1.0">
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_weight="0.48"
                         android:text="Chamber"
                         android:textStyle="bold"
@@ -165,6 +168,7 @@
                     android:layout_height="wrap_content"
                     android:weightSum="1.0">
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_weight="0.48"
                         android:text="Contact"
                         android:textSize="20dp"
@@ -185,6 +189,7 @@
                     android:layout_height="wrap_content"
                     android:weightSum="1.0">
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_weight="0.48"
                         android:text="Start Term"
                         android:textSize="20dp"
@@ -205,6 +210,7 @@
                     android:layout_height="wrap_content"
                     android:weightSum="1.0">
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_weight="0.48"
                         android:text="End Term"
                         android:textSize="20dp"
@@ -225,6 +231,7 @@
                     android:layout_height="wrap_content"
                     android:weightSum="1.0">
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_weight="0.48"
                         android:text="Term"
                         android:textStyle="bold"
@@ -246,9 +253,9 @@
                             android:layout_width="match_parent" />
 
                         <TextView
+                            android:id="@+id/percentageText"
                             android:layout_height="wrap_content"
                             android:background="#00000000"
-                            android:text="70%"
                             android:layout_width="wrap_content"
                             android:layout_alignParentLeft="false"
                             android:layout_alignParentRight="false"
@@ -261,6 +268,7 @@
                     android:layout_height="wrap_content"
                     android:weightSum="1.0">
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_weight="0.48"
                         android:text="Office"
                         android:textStyle="bold"
@@ -281,6 +289,7 @@
                     android:layout_height="wrap_content"
                     android:weightSum="1.0">
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_weight="0.48"
                         android:text="State"
                         android:textSize="20dp"
@@ -301,6 +310,7 @@
                     android:layout_height="wrap_content"
                     android:weightSum="1.0">
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_weight="0.48"
                         android:text="Fax"
                         android:textStyle="bold"
@@ -321,6 +331,7 @@
                     android:layout_height="wrap_content"
                     android:weightSum="1.0">
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_weight="0.48"
                         android:text="Birthday"
                         android:textSize="20dp"
@@ -336,9 +347,6 @@
                         android:gravity="right"
                         android:padding="3dip" />
                 </TableRow>
-
-
-
 
             </TableLayout>
 
