@@ -10,6 +10,11 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 /**
  * Created by Shekhar on 11/22/2016.
  */
@@ -49,7 +54,7 @@ public class BillsAdapter extends ArrayAdapter<String> {
             JSONObject jsonObject = new JSONObject(d);
             String id = null ;
             String title = null;
-            String intro = null;
+            Date intro = null;
 
             if(jsonObject.has("bill_id")){
                 id = jsonObject.getString("bill_id");
@@ -59,13 +64,16 @@ public class BillsAdapter extends ArrayAdapter<String> {
                 title = jsonObject.getString("official_title");
             }
 
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            DateFormat outputFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+
             if(jsonObject.has("introduced_on")){
-                intro = jsonObject.getString("introduced_on");
+                intro = format.parse(jsonObject.getString("introduced_on"));
             }
 
             billId.setText(id);
             billOfficialTitle.setText(title);
-            billIntroducedOn.setText(intro);
+            billIntroducedOn.setText(outputFormat.format(intro));
 
 
         }catch (Exception e){

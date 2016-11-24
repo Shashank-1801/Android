@@ -10,8 +10,8 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/legislatorsImage"
             android:layout_weight="5"
-            android:src="@mipmap/d"
             android:layout_width="80dp"
             android:layout_height="80dp" />
 
@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="10"
+            android:padding="15dp"
             android:orientation="vertical"  >
             <TextView
                 android:id="@+id/legislatorsFullName"
@@ -35,12 +36,18 @@
                 android:text="otherdata"
                 android:paddingTop="5dp"/>
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/legislatorsId"/>
+
         </LinearLayout>
 
         <ImageView
             android:layout_weight="1"
             android:id="@+id/icon"
             android:src="@mipmap/chevron"
+            android:layout_gravity="center_vertical"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginBottom="5dp"

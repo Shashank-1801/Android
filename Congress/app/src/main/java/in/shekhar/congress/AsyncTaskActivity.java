@@ -6,17 +6,13 @@ package in.shekhar.congress;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -57,7 +53,7 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected void onPostExecute(String strings) {
+    protected void onPostExecute(final String strings) {
         super.onPostExecute(strings);
         ArrayList<String> list = null;
         try {
@@ -74,9 +70,50 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
                 BillsAdapter billsAdapter = new BillsAdapter(activity, list.toArray(new String[0]));
                 lv.setAdapter(billsAdapter);
                 Log.d("","List View for Bills populated");
-            }else {
+            }
+            else if(source.equalsIgnoreCase("Committees")) {
+                Log.d("", "List View for Committees populating...");
+                JSONObject jsonString = new JSONObject(strings);
+                JSONArray jArray = jsonString.getJSONArray("results");
+                list = new ArrayList<>();
+                for (int i = 0; i < jArray.length(); i++) {
+                    list.add(jArray.getString(i));
+                }
+                ListView lv = (ListView) activity.findViewById(idOfElement);
+                CommitteesAdapter commAdapter = new CommitteesAdapter(activity, list.toArray(new String[0]));
+                lv.setAdapter(commAdapter);
+                Log.d("", "List View for Committees populated");
+            }
+            else if(source.equalsIgnoreCase("Legislators")) {
+                Log.d("", "List View for Legislators populating...");
+                JSONObject jsonString = new JSONObject(strings);
+                JSONArray jArray = jsonString.getJSONArray("results");
+                list = new ArrayList<>();
+                for (int i = 0; i < jArray.length(); i++) {
+                    list.add(jArray.getString(i));
+                }
+                ListView lv = (ListView) activity.findViewById(idOfElement);
+                LegislatorsAdapter commAdapter = new LegislatorsAdapter(activity, list.toArray(new String[0]));
+                lv.setAdapter(commAdapter);
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position,
+                                            long id) {
+
+                        //String item = ((TextView) view).getText().toString();
+                        //Toast.makeText(mContext, item, Toast.LENGTH_SHORT).show();
+
+
+
+                    }
+                });
+                Log.d("", "List View for Legislators populated");
+            }
+            else {
                 JSONObject jsonString = new JSONObject(strings);
                 Log.d("", jsonString.toString());
+                Log.d("", "we should not be here!");
+                /*
                 JSONArray jArray = jsonString.getJSONArray("results");
                 list = new ArrayList<>();
                 for (int i = 0; i < jArray.length(); i++) {
@@ -88,31 +125,7 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
                         android.R.layout.simple_list_item_1, list);
 
                 lv.setAdapter(adapter);
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position,
-                                            long id) {
-
-                        String item = ((TextView) view).getText().toString();
-                        Toast.makeText(mContext, item, Toast.LENGTH_SHORT).show();
-
-                        Intent details;
-                        details = new Intent(activity, DetailsPage.class);
-                        String title = null;
-                        if (source.equalsIgnoreCase("Legislators")) {
-                            title = "Legislators Info";
-                        } else if (source.equalsIgnoreCase("Committees")) {
-                            title = "Committees Info";
-                        } else {
-                            title = "Bills Info";
-                        }
-                        details.putExtra("info", item);
-                        details.putExtra("title", title);
-                        //details.putExtra("image", getImage());
-                        activity.startActivity(details);
-
-                    }
-                });
+                */
             }
 
         }catch (Exception e){

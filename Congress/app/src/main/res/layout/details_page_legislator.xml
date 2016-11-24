@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_details_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="in.shekhar.congress.LegislatorDetailsPage"
+    tools:showIn="@layout/activity_details_page">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:padding="15dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@mipmap/star_blank"
+                    android:id="@+id/favoritesIcon"
+                    android:layout_alignParentTop="true"
+                    android:layout_toStartOf="@+id/twitter" />
+
+                <ImageView
+                    android:padding="10dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@mipmap/f"
+                    android:id="@+id/facebook"
+                    android:layout_alignParentTop="true"
+                    android:layout_toStartOf="@+id/twitter" />
+
+                <ImageView
+                    android:padding="10dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@mipmap/t"
+                    android:layout_alignBottom="@+id/facebook"
+                    android:layout_toEndOf="@+id/imageOfLegislator"
+                    android:id="@+id/twitter" />
+
+                <ImageView
+                    android:padding="10dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@mipmap/w"
+                    android:id="@+id/webpage"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/twitter" />
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageOfLegislator"
+                android:maxHeight="20dp"
+                android:maxWidth="20dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@mipmap/image"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="54dp" />
+
+
+            <LinearLayout
+                android:id="@+id/logoAndName"
+                android:layout_below="@+id/imageOfLegislator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="5dp"
+                    app:srcCompat="@mipmap/r"
+                    android:id="@+id/partyLogo" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nameOfParty" />
+
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/logoAndName">
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:weightSum="1.0">
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_weight="0.48"
+                        android:text="Name"
+                        android:textStyle="bold"
+                        android:padding="10dp"
+                        android:gravity="left"/>
+                    <TextView
+                        android:id="@+id/nameOfLegislator"
+                        android:layout_weight="0.48"
+                        android:text="Some Name"
+                        android:width="200dp"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:weightSum="1.0">
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_weight="0.48"
+                        android:text="Email"
+                        android:textStyle="bold"
+                        android:padding="10dp"                        android:gravity="left"/>
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_weight="0.48"
+                        android:text="Some Name"
+                        android:width="200dp"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:weightSum="1.0">
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_weight="0.48"
+                        android:text="Chamber"
+                        android:textStyle="bold"
+                        android:padding="10dp"                        android:gravity="left"/>
+                    <TextView
+                        android:id="@+id/chamber"
+                        android:layout_weight="0.48"
+                        android:text="Some Name"
+                        android:width="200dp"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:weightSum="1.0">
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_weight="0.48"
+                        android:text="Contact"
+                        android:textStyle="bold"
+                        android:padding="10dp"                        android:gravity="left"/>
+                    <TextView
+                        android:id="@+id/contact"
+                        android:layout_weight="0.48"
+                        android:text="Some Name"
+                        android:width="200dp"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:weightSum="1.0">
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_weight="0.48"
+                        android:text="Start Term"
+                        android:textStyle="bold"
+                        android:padding="10dp"                        android:gravity="left"/>
+                    <TextView
+                        android:id="@+id/termStart"
+                        android:layout_weight="0.48"
+                        android:text="Some Name"
+                        android:width="200dp"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:weightSum="1.0">
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_weight="0.48"
+                        android:text="End Term"
+                        android:textStyle="bold"
+                        android:padding="10dp"                        android:gravity="left"/>
+                    <TextView
+                        android:id="@+id/termEnd"
+                        android:layout_weight="0.48"
+                        android:text="Some Name"
+                        android:width="200dp"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:weightSum="1.0">
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_weight="0.48"
+                        android:text="Term"
+                        android:textStyle="bold"
+                        android:padding="10dp">
+                    </TextView>
+
+
+                    <RelativeLayout
+                        android:id="@+id/progress"
+                        android:layout_weight="0.48"
+                        android:width="200dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="0dp"
+                        android:gravity="center">
+
+                        <ProgressBar
+                            android:id="@+id/term"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:layout_height="match_parent"
+                            android:layout_width="match_parent" />
+
+                        <TextView
+                            android:id="@+id/percentageText"
+                            android:layout_height="wrap_content"
+                            android:background="#00000000"
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentLeft="false"
+                            android:layout_alignParentRight="false"
+                            android:layout_centerVertical="false"
+                            android:layout_centerHorizontal="true" />
+                    </RelativeLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:weightSum="1.0">
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_weight="0.48"
+                        android:text="Office"
+                        android:textStyle="bold"
+                        android:padding="10dp"                        android:gravity="left"/>
+                    <TextView
+                        android:id="@+id/office"
+                        android:layout_weight="0.48"
+                        android:width="200dp"
+                        android:text="Some Name"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:weightSum="1.0">
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_weight="0.48"
+                        android:text="State"
+                        android:textStyle="bold"
+                        android:padding="10dp"                        android:gravity="left"/>
+                    <TextView
+                        android:id="@+id/state"
+                        android:layout_weight="0.48"
+                        android:text="Some Name"
+                        android:width="200dp"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:weightSum="1.0">
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_weight="0.48"
+                        android:text="Fax"
+                        android:textStyle="bold"
+                        android:padding="10dp"                        android:gravity="left"/>
+                    <TextView
+                        android:id="@+id/fax"
+                        android:layout_weight="0.48"
+                        android:text="Some Name"
+                        android:width="200dp"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:weightSum="1.0">
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_weight="0.48"
+                        android:text="Birthday"
+                        android:textStyle="bold"
+                        android:padding="10dp"                        android:gravity="left"/>
+                    <TextView
+                        android:id="@+id/bDay"
+                        android:layout_weight="0.48"
+                        android:text="Some Name"
+                        android:width="200dp"
+                        android:gravity="right"
+                        android:padding="3dip" />
+                </TableRow>
+
+            </TableLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
