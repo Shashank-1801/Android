@@ -28,7 +28,6 @@ public class LegislatorsAdapter extends ArrayAdapter<String> {
 
     public LegislatorsAdapter(Activity context, String[] info) {
         super(context, R.layout.layout_bill_adapter);
-        // TODO Auto-generated constructor stub
 
         this.context=context;
         data = info;
@@ -66,6 +65,9 @@ public class LegislatorsAdapter extends ArrayAdapter<String> {
                 id = jsonObject.getString("bioguide_id");
             }
 
+
+//            http://stackoverflow.com/questions/29861929/android-java-lang-outofmemoryerror
+//            https://www.google.com/search?q=Caused+by%3A+java.lang.OutOfMemoryError%3A+Failed+to+allocate+a+67642860+byte+allocation+with+4050096+free+bytes+and+3MB+until+OOM+at+dalvik.system.VMRuntime.newNonMovableArray(Native+Method)&oq=Caused+by%3A+java.lang.OutOfMemoryError%3A+Failed+to+allocate+a+67642860+byte+allocation+with+4050096+free+bytes+and+3MB+until+OOM+at+dalvik.system.VMRuntime.newNonMovableArray(Native+Method)&aqs=chrome..69i57.273j0j7&sourceid=chrome&ie=UTF-8#q=java.lang.outofmemoryerror+failed+to+allocate+in+android+crash
 //            GetData getData = new GetData(id, context, imageView);
 //            getData.execute("");
 

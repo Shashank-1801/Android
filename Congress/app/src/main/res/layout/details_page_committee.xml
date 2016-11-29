@@ -28,7 +28,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     app:srcCompat="@mipmap/star_blank"
-                    android:id="@+id/favoritesIcon"
+                    android:id="@+id/committeeFavoritesIcon"
                     android:layout_alignParentTop="true"
                     android:layout_toStartOf="@+id/twitter" />
 

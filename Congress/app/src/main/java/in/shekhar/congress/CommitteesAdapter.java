@@ -1,6 +1,7 @@
 package in.shekhar.congress;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,6 @@ public class CommitteesAdapter extends ArrayAdapter<String> {
 
     public CommitteesAdapter(Activity context, String[] info) {
         super(context, R.layout.layout_bill_adapter);
-        // TODO Auto-generated constructor stub
 
         this.context=context;
         data = info;
@@ -72,6 +72,17 @@ public class CommitteesAdapter extends ArrayAdapter<String> {
             e.printStackTrace();
         }
 
+        rowView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent details;
+                details = new Intent(getContext(), CommitteeDetailsPage.class);
+                String title = "Committee Info";
+                details.putExtra("id", ((TextView) view.findViewById(R.id.committeeId)).getText().toString());
+                details.putExtra("title", title);
+                getContext().startActivity(details);
+            }
+        });
 
 
         return rowView;

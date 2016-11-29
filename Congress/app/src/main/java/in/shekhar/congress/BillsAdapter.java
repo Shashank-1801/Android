@@ -1,6 +1,7 @@
 package in.shekhar.congress;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,7 +81,17 @@ public class BillsAdapter extends ArrayAdapter<String> {
             e.printStackTrace();
         }
 
-
+        rowView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent details;
+                details = new Intent(getContext(), BillDetailsPage.class);
+                String title = "Bills Info";
+                details.putExtra("id", ((TextView) view.findViewById(R.id.billId)).getText().toString());
+                details.putExtra("title", title);
+                getContext().startActivity(details);
+            }
+        });
 
         return rowView;
 
