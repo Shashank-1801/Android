@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="in.shekhar.congress.LegislatorDetailsPage"
-    tools:showIn="@layout/activity_details_page">
+    tools:showIn="@layout/details_page_legislator_container">
 
     <ScrollView
         android:layout_width="match_parent"

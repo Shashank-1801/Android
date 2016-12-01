@@ -49,7 +49,7 @@ public class BillsAdapter extends ArrayAdapter<String> {
         TextView billOfficialTitle = (TextView) rowView.findViewById(R.id.billOfficialTitle);
         TextView billId = (TextView) rowView.findViewById(R.id.billId);
         TextView billIntroducedOn = (TextView) rowView.findViewById(R.id.billIntroduedOn);
-
+        TextView billInfoString = (TextView) rowView.findViewById(R.id.billsInfoString);
         try{
             String d = data[position];
             JSONObject jsonObject = new JSONObject(d);
@@ -72,10 +72,11 @@ public class BillsAdapter extends ArrayAdapter<String> {
                 intro = format.parse(jsonObject.getString("introduced_on"));
             }
 
-            billId.setText(id);
+            billId.setText(id.toUpperCase());
             billOfficialTitle.setText(title);
             billIntroducedOn.setText(outputFormat.format(intro));
-
+            billInfoString.setText(d);
+            billInfoString.setVisibility(View.GONE);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -88,6 +89,7 @@ public class BillsAdapter extends ArrayAdapter<String> {
                 details = new Intent(getContext(), BillDetailsPage.class);
                 String title = "Bills Info";
                 details.putExtra("id", ((TextView) view.findViewById(R.id.billId)).getText().toString());
+                details.putExtra("info", ((TextView) view.findViewById(R.id.billsInfoString)).getText().toString());
                 details.putExtra("title", title);
                 getContext().startActivity(details);
             }

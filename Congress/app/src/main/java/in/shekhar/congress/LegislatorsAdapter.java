@@ -51,6 +51,7 @@ public class LegislatorsAdapter extends ArrayAdapter<String> {
         TextView legislatorName = (TextView) rowView.findViewById(R.id.legislatorsFullName);
         TextView legislatorInfo = (TextView) rowView.findViewById(R.id.legislatorsOtherData);
         TextView legislatorId = (TextView) rowView.findViewById(R.id.legislatorsId);
+        TextView legislatorInfoString = (TextView) rowView.findViewById(R.id.legislatorsInfoString);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.legislatorsImage);
 
 
@@ -68,8 +69,8 @@ public class LegislatorsAdapter extends ArrayAdapter<String> {
 
 //            http://stackoverflow.com/questions/29861929/android-java-lang-outofmemoryerror
 //            https://www.google.com/search?q=Caused+by%3A+java.lang.OutOfMemoryError%3A+Failed+to+allocate+a+67642860+byte+allocation+with+4050096+free+bytes+and+3MB+until+OOM+at+dalvik.system.VMRuntime.newNonMovableArray(Native+Method)&oq=Caused+by%3A+java.lang.OutOfMemoryError%3A+Failed+to+allocate+a+67642860+byte+allocation+with+4050096+free+bytes+and+3MB+until+OOM+at+dalvik.system.VMRuntime.newNonMovableArray(Native+Method)&aqs=chrome..69i57.273j0j7&sourceid=chrome&ie=UTF-8#q=java.lang.outofmemoryerror+failed+to+allocate+in+android+crash
-//            GetData getData = new GetData(id, context, imageView);
-//            getData.execute("");
+            GetData getData = new GetData(id, context, imageView);
+            getData.execute("");
 
             String lname = "NA";
             if(jsonObject.has("last_name")){
@@ -106,6 +107,8 @@ public class LegislatorsAdapter extends ArrayAdapter<String> {
             legislatorName.setText(name);
             legislatorInfo.setText(info);
             legislatorId.setText(id);
+            legislatorInfoString.setText(d);
+            legislatorInfoString.setVisibility(View.GONE);
             legislatorId.setVisibility(View.GONE);
 
 
@@ -117,6 +120,7 @@ public class LegislatorsAdapter extends ArrayAdapter<String> {
                     String title = "Legislators Info";
                     details.putExtra("id", ((TextView) view.findViewById(R.id.legislatorsId)).getText().toString());
                     details.putExtra("title", title);
+                    details.putExtra("info", ((TextView) view.findViewById(R.id.legislatorsInfoString)).getText().toString());
                     getContext().startActivity(details);
                 }
             });

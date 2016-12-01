@@ -43,6 +43,7 @@ public class CommitteesAdapter extends ArrayAdapter<String> {
         TextView commId = (TextView) rowView.findViewById(R.id.committeeId);
         TextView commName = (TextView) rowView.findViewById(R.id.committeeName);
         TextView commChamber = (TextView) rowView.findViewById(R.id.committeeChamber);
+        TextView commInfoString = (TextView) rowView.findViewById(R.id.committeeInfoString);
 
         try{
             String d = data[position];
@@ -66,7 +67,7 @@ public class CommitteesAdapter extends ArrayAdapter<String> {
             commId.setText(id);
             commName.setText(name);
             commChamber.setText(chamber);
-
+            commInfoString.setText(d);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -80,6 +81,7 @@ public class CommitteesAdapter extends ArrayAdapter<String> {
                 String title = "Committee Info";
                 details.putExtra("id", ((TextView) view.findViewById(R.id.committeeId)).getText().toString());
                 details.putExtra("title", title);
+                details.putExtra("info", ((TextView) view.findViewById(R.id.committeeInfoString)).getText().toString());
                 getContext().startActivity(details);
             }
         });

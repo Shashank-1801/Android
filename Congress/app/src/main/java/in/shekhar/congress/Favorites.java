@@ -1,5 +1,9 @@
 package in.shekhar.congress;
 
+/**
+ * Created by Shekhar on 11/17/2016.
+ */
+
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
 
@@ -135,25 +138,22 @@ public class Favorites extends Fragment {
             }
         }
 
-        ArrayAdapter adapter;
+        LegislatorsAdapter legislatorAdapter;
         // Legislators
-        adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, legislatorsList);
+        legislatorAdapter = new LegislatorsAdapter(getActivity(), legislatorsList.toArray(new String[0]));
         ListView legislatorsListView = (ListView) view.findViewById(R.id.favoritesListViewLegislators);
-        legislatorsListView.setAdapter(adapter);
+        legislatorsListView.setAdapter(legislatorAdapter);
 
         // Bills
-        adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, billsList);
+        BillsAdapter billsAdapter = new BillsAdapter(getActivity(), billsList.toArray(new String[0]));
         ListView billsListView = (ListView) view.findViewById(R.id.favoritesListViewBills);
-        billsListView.setAdapter(adapter);
+        billsListView.setAdapter(billsAdapter);
 
 
         // Committees
-        adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, committeesList);
+        CommitteesAdapter committeesAdapter = new CommitteesAdapter(getActivity(), committeesList.toArray(new String[0]));
         ListView committeesListView = (ListView) view.findViewById(R.id.favoritesListViewCommittees);
-        committeesListView.setAdapter(adapter);
+        committeesListView.setAdapter(committeesAdapter);
 
         return view;
     }

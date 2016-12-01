@@ -10,11 +10,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -22,6 +22,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
@@ -61,11 +62,15 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
             if(source.equalsIgnoreCase("Bills")){
                 Log.d("","List View for Bills populating...");
                 JSONObject jsonString = new JSONObject(strings);
+
                 JSONArray jArray = jsonString.getJSONArray("results");
+
+                JSONArray sorted = sortList(jArray, "introduced_on");
                 list = new ArrayList<>();
                 for (int i = 0; i < jArray.length(); i++) {
-                    list.add(jArray.getString(i));
+                    list.add(sorted.getString(i));
                 }
+
                 ListView lv = (ListView) activity.findViewById(idOfElement);
                 BillsAdapter billsAdapter = new BillsAdapter(activity, list.toArray(new String[0]));
                 lv.setAdapter(billsAdapter);
@@ -75,10 +80,13 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
                 Log.d("", "List View for Committees populating...");
                 JSONObject jsonString = new JSONObject(strings);
                 JSONArray jArray = jsonString.getJSONArray("results");
+
+                JSONArray sorted = sortList(jArray, "name");
                 list = new ArrayList<>();
                 for (int i = 0; i < jArray.length(); i++) {
-                    list.add(jArray.getString(i));
+                    list.add(sorted.getString(i));
                 }
+
                 ListView lv = (ListView) activity.findViewById(idOfElement);
                 CommitteesAdapter commAdapter = new CommitteesAdapter(activity, list.toArray(new String[0]));
                 lv.setAdapter(commAdapter);
@@ -88,44 +96,30 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
                 Log.d("", "List View for Legislators populating...");
                 JSONObject jsonString = new JSONObject(strings);
                 JSONArray jArray = jsonString.getJSONArray("results");
+
+                JSONArray sorted = sortList(jArray, "last_name");
                 list = new ArrayList<>();
                 for (int i = 0; i < jArray.length(); i++) {
-                    list.add(jArray.getString(i));
+                    list.add(sorted.getString(i));
                 }
+
                 ListView lv = (ListView) activity.findViewById(idOfElement);
                 LegislatorsAdapter commAdapter = new LegislatorsAdapter(activity, list.toArray(new String[0]));
                 lv.setAdapter(commAdapter);
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position,
-                                            long id) {
-
-                        //String item = ((TextView) view).getText().toString();
-                        //Toast.makeText(mContext, item, Toast.LENGTH_SHORT).show();
-
-
-
-                    }
-                });
+//                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view, int position,
+//                                            long id) {
+//
+//                    }
+//                });
                 Log.d("", "List View for Legislators populated");
             }
             else {
                 JSONObject jsonString = new JSONObject(strings);
                 Log.d("", jsonString.toString());
                 Log.d("", "we should not be here!");
-                /*
-                JSONArray jArray = jsonString.getJSONArray("results");
-                list = new ArrayList<>();
-                for (int i = 0; i < jArray.length(); i++) {
-                    list.add(jArray.getString(i));
-                }
-
-                ListView lv = (ListView) activity.findViewById(idOfElement);
-                ArrayAdapter adapter = new ArrayAdapter<String>(mContext,
-                        android.R.layout.simple_list_item_1, list);
-
-                lv.setAdapter(adapter);
-                */
+                Toast.makeText(mContext, "We should not be here!", Toast.LENGTH_SHORT).show();
             }
 
         }catch (Exception e){
@@ -177,5 +171,26 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
             e.printStackTrace();
         }
         return bmp;
+    }
+
+
+    public JSONArray sortList(JSONArray jArray, String tag){
+        try {
+            ArrayList<JSONObject> listJson = new ArrayList<>();
+            for (int i = 0; i < jArray.length(); i++) {
+                listJson.add((JSONObject) jArray.get(i));
+            }
+            Collections.sort(listJson, new JsonComp(tag));
+
+            JSONArray x = new JSONArray();
+            for (int i = 0; i < listJson.size(); i++) {
+                x.put(listJson.get(i).toString());
+            }
+            return  x;
+        }catch (JSONException je){
+            je.printStackTrace();
+        }
+
+        return jArray;
     }
 }

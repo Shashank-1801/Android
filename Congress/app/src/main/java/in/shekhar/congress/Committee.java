@@ -1,5 +1,9 @@
 package in.shekhar.congress;
 
+/**
+ * Created by Shekhar on 11/17/2016.
+ */
+
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,15 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Committee.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Committee#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Committee extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

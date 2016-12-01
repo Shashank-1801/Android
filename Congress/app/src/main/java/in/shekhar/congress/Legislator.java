@@ -13,13 +13,9 @@ import java.util.LinkedHashMap;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Legislator.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Legislator#newInstance} factory method to
- * create an instance of this fragment.
+ * Created by Shekhar on 11/17/2016.
  */
+
 public class Legislator extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

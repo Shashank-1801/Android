@@ -1,5 +1,9 @@
 package in.shekhar.congress;
 
+/**
+ * Created by Shekhar on 11/17/2016.
+ */
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -37,7 +41,7 @@ public class LegislatorDetailsPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_page);
+        setContentView(R.layout.details_page_legislator_container);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         sp = getSharedPreferences(PREFSTRING, Context.MODE_PRIVATE);
 
@@ -82,7 +86,7 @@ public class LegislatorDetailsPage extends AppCompatActivity {
                         }
 
                     }catch (Exception e){
-
+                        e.printStackTrace();
                     }
                 }
             });
@@ -357,7 +361,7 @@ public class LegislatorDetailsPage extends AppCompatActivity {
                 if (!(startTerm == null || endTerm == null)) {
                     total = endTerm.getTime() - startTerm.getTime();
                     completion = new Date().getTime() - startTerm.getTime();
-                    percent = (int) (completion / total) * 100;
+                    percent = (int) ((completion *100 / total));
                 }
 
                 String office = "NA";

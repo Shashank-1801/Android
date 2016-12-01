@@ -1,11 +1,11 @@
 package in.shekhar.congress;
 
-import android.app.Activity;
+/**
+ * Created by Shekhar on 11/17/2016.
+ */
+
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,17 +13,11 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,7 +31,7 @@ public class BillDetailsPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_page);
+        setContentView(R.layout.details_page_bill_container);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         sp = getSharedPreferences(PREFSTRING, Context.MODE_PRIVATE);
 
@@ -48,14 +42,11 @@ public class BillDetailsPage extends AppCompatActivity {
         String id = getIntent().getStringExtra("id");
 
         String info = getIntent().getStringExtra("info");
-        String img = "";
+
         try {
-            GetData gi = new GetData(id, this);
-            gi.execute("");
+            JSONObject jsonObject = new JSONObject(info);
 
-
-
-            final ImageView favImg = (ImageView) findViewById(R.id.favoritesIcon);
+            final ImageView favImg = (ImageView) findViewById(R.id.billFavoritesIcon);
             favImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -63,7 +54,7 @@ public class BillDetailsPage extends AppCompatActivity {
                     try {
                         String info = getIntent().getStringExtra("info");
                         JSONObject jsonObject = new JSONObject(info);
-                        String id = jsonObject.getString("bioguide_id");
+                        String id = jsonObject.getString("bill_id");
 
                         if(sp.contains(id)){
                             // is already saved
@@ -88,25 +79,39 @@ public class BillDetailsPage extends AppCompatActivity {
             });
 
 
-            /*
+
+            String billID = "NA";
+            if(jsonObject.has("bill_id")) {
+                billID = jsonObject.getString("bill_id");
+            }
+
             String title = "NA";
-            if(jsonObject.has("title")) {
-                title = jsonObject.getString("title");
+            if(jsonObject.has("official_title")){
+                title = jsonObject.getString("official_title");
             }
 
-            String lname = "NA";
-            if(jsonObject.has("last_name")){
-                lname = jsonObject.getString("last_name");
+            String billType = "NA";
+            if(jsonObject.has("bill_type")){
+                billType = jsonObject.getString("bill_type");
             }
 
-            String fname = "NA";
-            if(jsonObject.has("first_name")){
-                fname = jsonObject.getString("first_name");
-            }
+            String sponsor = "NA";
+            String lname = "";
+            String fname = "";
+            String stitle = "";
+            if(jsonObject.has("sponsor")){
+                JSONObject jo = jsonObject.getJSONObject("sponsor");
+                if(jo.has("last_name")){
+                    lname = jo.getString("last_name");
+                }
+                if(jo.has("first_name")){
+                    fname = jo.getString("first_name");
+                }
+                if(jo.has("title")){
+                    stitle = jo.getString("title");
+                }
 
-            String email = "NA";
-            if(jsonObject.has("oc_email")){
-                email = jsonObject.getString("oc_email");
+                sponsor = stitle + ". " + lname + ", " + fname;
             }
 
             String chamber = "NA";
@@ -114,133 +119,87 @@ public class BillDetailsPage extends AppCompatActivity {
                 chamber = jsonObject.getString("chamber");
             }
 
-            String contact = "NA";
-            if(jsonObject.has("phone")){
-                contact = jsonObject.getString("phone");
+            String status = "NA";
+            if(jsonObject.has("history")){
+                JSONObject jo = jsonObject.getJSONObject("history");
+                if(jo.has("active")) {
+                    boolean st;
+                    st = jo.getBoolean("active");
+                    if(st){
+                        status = "Active";
+                    }else{
+                        status = "New";
+                    }
+                }
             }
 
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            DateFormat outputFormat = new SimpleDateFormat("MMM DD, yyyy", Locale.ENGLISH);
+            DateFormat outputFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
             //Date date = format.parse(string);
-            Date startTerm = null;
-            if(jsonObject.has("term_start")) {
-                startTerm = format.parse(jsonObject.getString("term_start"));
-            }
-            Date endTerm = null;
-            if(jsonObject.has("term_end")){
-                endTerm = format.parse(jsonObject.getString("term_end"));
+            Date introducedOn = null;
+            if(jsonObject.has("introduced_on")) {
+                introducedOn = format.parse(jsonObject.getString("introduced_on"));
             }
 
-
-            // TODO : change the start and end term string to dates and then calculate the progress
-            long completion = 0;
-            long total = 0;
-            int percent = 50;
-            if(!(startTerm == null || endTerm == null)){
-                total = endTerm.getTime() - startTerm.getTime();
-                completion = new Date().getTime()- startTerm.getTime();
-                percent = (int)(completion/total)*100;
+            String congressUrl = "NA";
+            if(jsonObject.has("urls")){
+                JSONObject jo = jsonObject.getJSONObject("urls");
+                if(jo.has("congress")) {
+                    congressUrl = jo.getString("congress");
+                }
             }
 
-            String office = "NA";
-            if(jsonObject.has("")){
-                office = jsonObject.getString("office");
+            String versionStatus = "NA";
+            if(jsonObject.has("last_version")){
+                JSONObject jo = jsonObject.getJSONObject("last_version");
+                if(jo.has("version_name")){
+                    versionStatus = jo.getString("version_name");
+                }
             }
 
-            String state = "NA";
-            if(jsonObject.has("state")){
-                state = jsonObject.getString("state");
-            }
-
-            String fax = "NA";
-            if(jsonObject.has("fax")){
-                fax = jsonObject.getString("fax");
-            }
-
-            String bDay = "NA";
-            if(jsonObject.has("birthday")){
-                bDay = jsonObject.getString("birthday");
-            }
-
-            String facebook = null;
-            if(jsonObject.has("")){
-                facebook = jsonObject.getString("facebook_id");
-            }
-
-            String twitter = null;
-            if(jsonObject.has("twitter_id")){
-                twitter = jsonObject.getString("twitter_id");
-            }
-
-            String website = null;
-            if(jsonObject.has("")){
-                website = jsonObject.getString("website");
-            }
-
-            String party = null;
-            if(jsonObject.has("party")){
-                party = jsonObject.getString("party");
+            String billURL = "NA";
+            if(jsonObject.has("urls")){
+                JSONObject jo = jsonObject.getJSONObject("urls");
+                if(jo.has("pdf")) {
+                    billURL = jsonObject.getString("pdf");
+                }
             }
 
             // setting the values in text fields
 
-            TextView partyText = (TextView) findViewById(R.id.nameOfParty);
-            ImageView partyLogo = (ImageView) findViewById(R.id.partyLogo);
-            String partyValue = "Republican";
-            if(party.equalsIgnoreCase("d")){
-                partyValue = "Democratic";
-                partyLogo.setImageResource(R.mipmap.d);
-            }
-            partyText.setText(partyValue);
+            TextView billDetailsID = (TextView) findViewById(R.id.billDetailsId);
+            billDetailsID.setText(billID.toUpperCase());
 
-            TextView nameText = (TextView) findViewById(R.id.nameOfLegislator);
-            nameText.setText(title + ". " + lname + ", " + fname );
+            TextView billDetailsTitle = (TextView) findViewById(R.id.billDetailsTitle);
+            billDetailsTitle.setText(title);
 
-            TextView emailText = (TextView) findViewById(R.id.email);
-            emailText.setText(email);
+            TextView billDetailsType = (TextView) findViewById(R.id.billDetailsType);
+            billDetailsType.setText(billType.toUpperCase());
 
-            TextView chamberText = (TextView) findViewById(R.id.chamber);
-            chamberText.setText(chamber);
+            TextView billDetailsSponsor = (TextView) findViewById(R.id.billDetailsSponsor);
+            billDetailsSponsor.setText(sponsor);
 
-            TextView contactText = (TextView) findViewById(R.id.contact);
-            contactText.setText(contact);
+            TextView billDetailsChamber = (TextView) findViewById(R.id.billDetailsChamber);
+            billDetailsChamber.setText(chamber);
 
-            TextView startTermText = (TextView) findViewById(R.id.termStart);
-            startTermText.setText(outputFormat.format(startTerm));
+            TextView billDetailsStatus = (TextView) findViewById(R.id.billDetailsStatus);
+            billDetailsStatus.setText(status);
 
-            TextView endTermText = (TextView) findViewById(R.id.termEnd);
-            endTermText.setText(outputFormat.format(endTerm));
+            TextView billDetailsIntro = (TextView) findViewById(R.id.billDetailsIntroducedOn);
+            billDetailsIntro.setText(outputFormat.format(introducedOn));
 
+            TextView billDetailsCongressURL = (TextView) findViewById(R.id.billDetailsURL);
+            billDetailsCongressURL.setText(congressUrl);
 
+            TextView billDetailsVersionStatus = (TextView) findViewById(R.id.billDetailsVersion);
+            billDetailsVersionStatus.setText(versionStatus);
 
-            int max = 100;
-            int progress = percent;
-            ProgressBar pb = (ProgressBar) findViewById(R.id.term);
-            pb.setMax(max);
-            pb.setProgress(progress);
-            TextView per = (TextView) findViewById(R.id.percentageText);
-            String percentText = String.valueOf(percent) + "%";
-            per.setText(percentText);
-
-
-            TextView officeText = (TextView) findViewById(R.id.office);
-            officeText.setText(office);
-
-            TextView stateText = (TextView) findViewById(R.id.state);
-            stateText.setText(state);
-
-            TextView faxText = (TextView) findViewById(R.id.fax);
-            faxText.setText(fax);
-
-            TextView birthText = (TextView) findViewById(R.id.bDay);
-            birthText.setText(bDay);
-
-*/
+            TextView billDetailsBillURL = (TextView) findViewById(R.id.billDetailsBillURL);
+            billDetailsBillURL.setText(billURL);
 
 
         }catch(Exception ex){
             ex.printStackTrace();
-//            Log.d("", ex.getMessage());
         }
 
         // end of details
@@ -255,241 +214,4 @@ public class BillDetailsPage extends AppCompatActivity {
         return false;
     }
 
-
-    public class GetData extends AsyncTask<String, String, String>
-    {
-        Bitmap b;
-        String dataUrl;
-        String imageUrl;
-        String id;
-        Activity activity;
-
-        public  GetData(String legislatorId, Activity activity){
-            id = legislatorId;
-            this.activity = activity;
-            dataUrl = "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-details&bio_id=" + id;
-            imageUrl = "https://theunitedstates.io/images/congress/original/" + id + ".jpg";
-        }
-
-        @Override
-        protected void onPreExecute() {
-            // TODO Auto-generated method stub
-            super.onPreExecute();
-        }
-
-
-        @Override
-        protected String doInBackground(String... arg0) {
-            try
-            {
-                URL image = new URL(imageUrl);
-                b = BitmapFactory.decodeStream(image.openConnection().getInputStream());
-
-                String resultString = getData(dataUrl);
-                return resultString;
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            ImageView iv = (ImageView) findViewById(R.id.imageOfLegislator);
-            iv.setImageBitmap(b);
-
-            try {
-                JSONObject jsonObject = new JSONObject(result);
-                JSONArray ja = jsonObject.getJSONArray("results");
-                jsonObject = ja.getJSONObject(0);
-
-
-                String title = "NA";
-                if (jsonObject.has("title")) {
-                    title = jsonObject.getString("title");
-                }
-
-                String lname = "NA";
-                if (jsonObject.has("last_name")) {
-                    lname = jsonObject.getString("last_name");
-                }
-
-                String fname = "NA";
-                if (jsonObject.has("first_name")) {
-                    fname = jsonObject.getString("first_name");
-                }
-
-                String email = "NA";
-                if (jsonObject.has("oc_email")) {
-                    email = jsonObject.getString("oc_email");
-                }
-
-                String chamber = "NA";
-                if (jsonObject.has("chamber")) {
-                    chamber = jsonObject.getString("chamber");
-                }
-
-                String contact = "NA";
-                if (jsonObject.has("phone")) {
-                    contact = jsonObject.getString("phone");
-                }
-
-                DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-                DateFormat outputFormat = new SimpleDateFormat("MMM DD, yyyy", Locale.ENGLISH);
-                //Date date = format.parse(string);
-                Date startTerm = null;
-                if (jsonObject.has("term_start")) {
-                    startTerm = format.parse(jsonObject.getString("term_start"));
-                }
-                Date endTerm = null;
-                if (jsonObject.has("term_end")) {
-                    endTerm = format.parse(jsonObject.getString("term_end"));
-                }
-
-
-                // TODO : change the start and end term string to dates and then calculate the progress
-                long completion = 0;
-                long total = 0;
-                int percent = 50;
-                if (!(startTerm == null || endTerm == null)) {
-                    total = endTerm.getTime() - startTerm.getTime();
-                    completion = new Date().getTime() - startTerm.getTime();
-                    percent = (int) (completion / total) * 100;
-                }
-
-                String office = "NA";
-                if (jsonObject.has("")) {
-                    office = jsonObject.getString("office");
-                }
-
-                String state = "NA";
-                if (jsonObject.has("state")) {
-                    state = jsonObject.getString("state");
-                }
-
-                String fax = "NA";
-                if (jsonObject.has("fax")) {
-                    fax = jsonObject.getString("fax");
-                }
-
-                String bDay = "NA";
-                if (jsonObject.has("birthday")) {
-                    bDay = jsonObject.getString("birthday");
-                }
-
-                String facebook = null;
-                if (jsonObject.has("")) {
-                    facebook = jsonObject.getString("facebook_id");
-                }
-
-                String twitter = null;
-                if (jsonObject.has("twitter_id")) {
-                    twitter = jsonObject.getString("twitter_id");
-                }
-
-                String website = null;
-                if (jsonObject.has("")) {
-                    website = jsonObject.getString("website");
-                }
-
-                String party = null;
-                if (jsonObject.has("party")) {
-                    party = jsonObject.getString("party");
-                }
-
-                // setting the values in text fields
-
-                TextView partyText = (TextView) findViewById(R.id.nameOfParty);
-                ImageView partyLogo = (ImageView) findViewById(R.id.partyLogo);
-                String partyValue = "Republican";
-                if (party.equalsIgnoreCase("d")) {
-                    partyValue = "Democratic";
-                    partyLogo.setImageResource(R.mipmap.d);
-                }
-                partyText.setText(partyValue);
-
-                TextView nameText = (TextView) findViewById(R.id.nameOfLegislator);
-                nameText.setText(title + ". " + lname + ", " + fname);
-
-                TextView emailText = (TextView) findViewById(R.id.email);
-                emailText.setText(email);
-
-                TextView chamberText = (TextView) findViewById(R.id.chamber);
-                chamberText.setText(chamber);
-
-                TextView contactText = (TextView) findViewById(R.id.contact);
-                contactText.setText(contact);
-
-                TextView startTermText = (TextView) findViewById(R.id.termStart);
-                startTermText.setText(outputFormat.format(startTerm));
-
-                TextView endTermText = (TextView) findViewById(R.id.termEnd);
-                endTermText.setText(outputFormat.format(endTerm));
-
-
-                int max = 100;
-                int progress = percent;
-                ProgressBar pb = (ProgressBar) findViewById(R.id.term);
-                pb.setMax(max);
-                pb.setProgress(progress);
-                TextView per = (TextView) findViewById(R.id.percentageText);
-                String percentText = String.valueOf(percent) + "%";
-                per.setText(percentText);
-
-
-                TextView officeText = (TextView) findViewById(R.id.office);
-                officeText.setText(office);
-
-                TextView stateText = (TextView) findViewById(R.id.state);
-                stateText.setText(state);
-
-                TextView faxText = (TextView) findViewById(R.id.fax);
-                faxText.setText(fax);
-
-                TextView birthText = (TextView) findViewById(R.id.bDay);
-                birthText.setText(bDay);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-
-
-        public String getData(String url) {
-            HttpURLConnection c = null;
-            try {
-                URL u = new URL(url);
-                c = (HttpURLConnection) u.openConnection();
-                c.connect();
-                int status = c.getResponseCode();
-                switch (status) {
-                    case 200:
-                    case 201:
-                        BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
-                        StringBuilder sb = new StringBuilder();
-                        String line;
-                        while ((line = br.readLine()) != null) {
-                            sb.append(line+"\n");
-                        }
-                        br.close();
-                        return sb.toString();
-                }
-
-            } catch (Exception ex) {
-                return ex.toString();
-            } finally {
-                if (c != null) {
-                    try {
-                        c.disconnect();
-                    } catch (Exception ex) {
-                        //disconnect error
-                    }
-                }
-            }
-            return null;
-        }
-
-    }
 }
