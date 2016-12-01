@@ -39,14 +39,14 @@
                     app:srcCompat="@mipmap/f"
                     android:id="@+id/facebook"
                     android:layout_alignParentTop="true"
-                    android:layout_toStartOf="@+id/twitter" />
+                    android:layout_toStartOf="@id/twitter" />
 
                 <ImageView
                     android:padding="10dp"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     app:srcCompat="@mipmap/t"
-                    android:layout_alignBottom="@+id/facebook"
+                    android:layout_alignBottom="@id/facebook"
                     android:layout_toEndOf="@+id/imageOfLegislator"
                     android:id="@+id/twitter" />
 
@@ -57,7 +57,7 @@
                     app:srcCompat="@mipmap/w"
                     android:id="@+id/webpage"
                     android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/twitter" />
+                    android:layout_toEndOf="@id/twitter" />
 
 
             </LinearLayout>
@@ -68,7 +68,7 @@
                 android:maxWidth="20dp"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@mipmap/image"
+                android:src="@mipmap/placeholder"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="54dp" />

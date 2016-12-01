@@ -82,11 +82,11 @@ public class Bills extends Fragment {
         host.addTab(spec);
 
         // fetch data for active bills
-        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=bills-active", getActivity(), R.id.billsListViewActive, "Bills");
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=bills-active", getActivity(), R.id.billsListViewActive, "Bills", 0);
         ata.execute();
 
         // fetch data for new bills
-        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=bills-new", getActivity(), R.id.billsListViewNew, "Bills");
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=bills-new", getActivity(), R.id.billsListViewNew, "Bills", 0);
         ata.execute();
 
 

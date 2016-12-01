@@ -10,7 +10,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -23,6 +26,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
@@ -31,14 +37,16 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
     Activity activity;
     int idOfElement;
     String source;
+    int indexerID;
 
 
-    public AsyncTaskActivity(Context context, String url, Activity ac, int id, String type) {
+    public AsyncTaskActivity(Context context, String url, Activity ac, int id, String type, int indexID) {
         mContext = context;
         mUrl = url;
         activity = ac;
         idOfElement = id;
         source = type;
+        indexerID = indexID;
     }
 
     @Override
@@ -103,16 +111,42 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
                     list.add(sorted.getString(i));
                 }
 
+
+                ArrayList<String> names = new ArrayList<>();
+                for(int i=0; i<sorted.length(); i++){
+                    names.add(sorted.getJSONObject(i).getString("last_name"));
+                }
+
+                final Map<String, Integer> indexMap = new LinkedHashMap();
+                for(int i=0; i<list.size(); i++){
+                    if(indexMap.get(names.get(i).substring(0,1))==null) {
+                        indexMap.put(names.get(i).substring(0,1), i);
+                    }
+                }
+
+                LinearLayout linearLayout = (LinearLayout)  activity.findViewById(indexerID);
+                List<String> indexList = new ArrayList<String>(indexMap.keySet());
+                for (String index : indexList) {
+                    TextView textView = new TextView(activity);
+                    textView.setText(index);
+                    textView.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+                    textView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            TextView selectedIndex = (TextView) view;
+                            ListView lv = (ListView) activity.findViewById(idOfElement);
+                            lv.setSelection(indexMap.get(selectedIndex.getText()));
+                        }
+                    });
+                    linearLayout.addView(textView);
+
+                }
+
+
+
                 ListView lv = (ListView) activity.findViewById(idOfElement);
                 LegislatorsAdapter commAdapter = new LegislatorsAdapter(activity, list.toArray(new String[0]));
                 lv.setAdapter(commAdapter);
-//                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int position,
-//                                            long id) {
-//
-//                    }
-//                });
                 Log.d("", "List View for Legislators populated");
             }
             else {
@@ -178,13 +212,13 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
         try {
             ArrayList<JSONObject> listJson = new ArrayList<>();
             for (int i = 0; i < jArray.length(); i++) {
-                listJson.add((JSONObject) jArray.get(i));
+                listJson.add(jArray.getJSONObject(i));
             }
             Collections.sort(listJson, new JsonComp(tag));
 
             JSONArray x = new JSONArray();
             for (int i = 0; i < listJson.size(); i++) {
-                x.put(listJson.get(i).toString());
+                x.put((JSONObject)listJson.get(i));
             }
             return  x;
         }catch (JSONException je){

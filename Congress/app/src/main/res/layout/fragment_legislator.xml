@@ -49,41 +49,11 @@
                         <LinearLayout
                             android:id="@+id/legislatorsIndexState"
                             android:layout_weight="1"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
+                            android:padding="5dp"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
                             android:gravity="center_vertical|center_horizontal">
-
-                            <TextView
-                                android:id="@+id/A"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="A"
-                                />
-                            <TextView
-                                android:id="@+id/B"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="B"
-                                />
-                            <TextView
-                                android:id="@+id/C"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="C"
-                                />
-                            <TextView
-                                android:id="@+id/D"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="D"
-                                />
-                            <TextView
-                                android:id="@+id/E"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="E"
-                                />
 
                         </LinearLayout>
 
@@ -104,36 +74,11 @@
                         <LinearLayout
                             android:id="@+id/legislatorsIndexHouse"
                             android:layout_weight="1"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
+                            android:padding="5dp"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
                             android:gravity="center_vertical|center_horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="A"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="B"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="C"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="D"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="E"
-                                />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -154,36 +99,12 @@
                         <LinearLayout
                             android:id="@+id/legislatorsIndexSenate"
                             android:layout_weight="1"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
+                            android:padding="5dp"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
                             android:gravity="center_vertical|center_horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="A"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="B"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="C"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="D"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="E"
-                                />
                         </LinearLayout>
                     </LinearLayout>
 

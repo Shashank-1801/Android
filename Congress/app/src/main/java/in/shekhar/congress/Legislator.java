@@ -89,15 +89,15 @@ public class Legislator extends Fragment {
         host.addTab(spec);
 
         // fetch data for all legislators
-        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-all", getActivity(), R.id.legislatorsListViewByState, "Legislators");
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-all", getActivity(), R.id.legislatorsListViewByState, "Legislators", R.id.legislatorsIndexState);
         ata.execute();
 
         // fetch data for legislators house
-        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-house", getActivity(), R.id.legislatorsListViewHouse, "Legislators");
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-house", getActivity(), R.id.legislatorsListViewHouse, "Legislators",R.id.legislatorsIndexHouse);
         ata.execute();
 
         // fetch data for legislators senate
-        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-senate", getActivity(), R.id.legislatorsListViewSenate, "Legislators");
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=legislators-senate", getActivity(), R.id.legislatorsListViewSenate, "Legislators",R.id.legislatorsIndexSenate);
         ata.execute();
 
 //        ListView fruitList = (ListView)   getActivity().findViewById(R.id.Legis)
