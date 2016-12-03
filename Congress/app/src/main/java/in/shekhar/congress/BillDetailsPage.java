@@ -47,6 +47,13 @@ public class BillDetailsPage extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(info);
 
             final ImageView favImg = (ImageView) findViewById(R.id.billFavoritesIcon);
+            SharedPreferences.Editor editor = sp.edit();
+            if(sp.contains(id.toLowerCase())){
+                favImg.setImageResource(R.mipmap.star_yellow );
+            }else{
+                favImg.setImageResource(R.mipmap.star_blank);
+            }
+
             favImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -63,6 +70,7 @@ public class BillDetailsPage extends AppCompatActivity {
                             editor.commit();
                             Toast.makeText(BillDetailsPage.this, "Was already saved, removed it", Toast.LENGTH_SHORT).show();
                             favImg.setImageResource(R.mipmap.star_blank);
+                            Favorites.loadPageContents();
                         }else{
                             // not saved... save the data
                             editor.putString(id, info);
@@ -70,6 +78,7 @@ public class BillDetailsPage extends AppCompatActivity {
                             Toast.makeText(BillDetailsPage.this, "Saved", Toast.LENGTH_SHORT).show();
                             Log.d("", "Information Saved : " + info);
                             favImg.setImageResource(R.mipmap.star_yellow);
+                            Favorites.loadPageContents();
                         }
 
                     }catch (Exception e){
@@ -117,6 +126,9 @@ public class BillDetailsPage extends AppCompatActivity {
             String chamber = "NA";
             if(jsonObject.has("chamber")){
                 chamber = jsonObject.getString("chamber");
+                String temp = chamber.substring(0,1).toUpperCase();
+                temp += chamber.substring(1);
+                chamber = temp;
             }
 
             String status = "NA";

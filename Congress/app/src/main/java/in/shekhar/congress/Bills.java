@@ -86,7 +86,7 @@ public class Bills extends Fragment {
         ata.execute();
 
         // fetch data for new bills
-        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=bills-new", getActivity(), R.id.billsListViewNew, "Bills", 0);
+        ata = new AsyncTaskActivity(getActivity(), "http://default-environment.vmdfp4m4zb.us-west-2.elasticbeanstalk.com/phpfunc.php?dbtype=bills-new", getActivity(), R.id.billsListViewNew, "Bills", 1);
         ata.execute();
 
 

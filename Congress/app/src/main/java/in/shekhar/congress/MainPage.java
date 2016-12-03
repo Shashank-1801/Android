@@ -112,6 +112,7 @@ public class MainPage extends AppCompatActivity
         if (id == R.id.abt_me) {
             intent = new Intent(this, AboutMe.class);
             startActivity(intent);
+            toolbar.setTitle("About Me");
         } else if (id == R.id.legs) {
             toolbar.setTitle("Legislators");
             Fragment newFragment = new Legislator();
@@ -142,6 +143,8 @@ public class MainPage extends AppCompatActivity
             toolbar.setTitle("Favorites");
         }
 
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 

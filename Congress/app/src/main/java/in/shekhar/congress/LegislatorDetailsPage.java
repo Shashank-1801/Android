@@ -6,9 +6,11 @@ package in.shekhar.congress;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -59,8 +61,14 @@ public class LegislatorDetailsPage extends AppCompatActivity {
             gi.execute("");
 
 
-
             final ImageView favImg = (ImageView) findViewById(R.id.favoritesIcon);
+            SharedPreferences.Editor editor = sp.edit();
+            if(sp.contains(id)){
+                favImg.setImageResource(R.mipmap.star_yellow );
+            }else{
+                favImg.setImageResource(R.mipmap.star_blank);
+            }
+
             favImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -77,6 +85,7 @@ public class LegislatorDetailsPage extends AppCompatActivity {
                             editor.commit();
                             Toast.makeText(LegislatorDetailsPage.this, "Was already saved, removed it", Toast.LENGTH_SHORT).show();
                             favImg.setImageResource(R.mipmap.star_blank);
+                            Favorites.loadPageContents();
                         }else{
                             // not saved... save the data
                             editor.putString(id, info);
@@ -84,6 +93,7 @@ public class LegislatorDetailsPage extends AppCompatActivity {
                             Toast.makeText(LegislatorDetailsPage.this, "Saved", Toast.LENGTH_SHORT).show();
                             Log.d("", "Information Saved : " + info);
                             favImg.setImageResource(R.mipmap.star_yellow);
+                            Favorites.loadPageContents();
                         }
 
                     }catch (Exception e){
@@ -97,13 +107,21 @@ public class LegislatorDetailsPage extends AppCompatActivity {
             facebookImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SharedPreferences.Editor editor = sp.edit();
                     try {
                         String info = getIntent().getStringExtra("info");
                         JSONObject jsonObject = new JSONObject(info);
-                        String fbLink = jsonObject.getString("facebook");
+                        String fbLink = jsonObject.getString("facebook_id");
+                        if(!fbLink.equals("null")){
+                            String link = "http://www.facebook.com/" + fbLink;
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(link));
+                            startActivity(i);
+                        }else{
+                            Toast.makeText(LegislatorDetailsPage.this, "Facebook link not available", Toast.LENGTH_SHORT).show();
+
+                        }
                     }catch (Exception e){
-                        Toast.makeText(LegislatorDetailsPage.this, "Facebook link not available", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LegislatorDetailsPage.this, "Facebook link not available", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -112,13 +130,20 @@ public class LegislatorDetailsPage extends AppCompatActivity {
             twitterImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SharedPreferences.Editor editor = sp.edit();
                     try {
                         String info = getIntent().getStringExtra("info");
                         JSONObject jsonObject = new JSONObject(info);
-                        String fbLink = jsonObject.getString("facebook");
+                        String twLink = jsonObject.getString("twitter_id");
+                        if(!twLink.equals("null")){
+                            String link = "http://www.twitter.com/" + twLink;
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(link));
+                            startActivity(i);
+                        }else{
+                            Toast.makeText(LegislatorDetailsPage.this, "Twitter link not available", Toast.LENGTH_SHORT).show();
+                        }
                     }catch (Exception e){
-                        Toast.makeText(LegislatorDetailsPage.this, "Twitter link not available", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LegislatorDetailsPage.this, "Twitter link not available", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -127,20 +152,26 @@ public class LegislatorDetailsPage extends AppCompatActivity {
             websiteImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SharedPreferences.Editor editor = sp.edit();
                     try {
                         String info = getIntent().getStringExtra("info");
                         JSONObject jsonObject = new JSONObject(info);
-                        String fbLink = jsonObject.getString("facebook");
+                        String webLink = jsonObject.getString("website");
+                        if(!webLink.equals("null")){
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(webLink));
+                            startActivity(i);
+                        }else{
+                            Toast.makeText(LegislatorDetailsPage.this, "Webpage link not available", Toast.LENGTH_SHORT).show();
+
+                        }
                     }catch (Exception e){
-                        Toast.makeText(LegislatorDetailsPage.this, "Website link not available", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LegislatorDetailsPage.this, "Website link not available", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
 
         }catch(Exception ex){
             ex.printStackTrace();
-//            Log.d("", ex.getMessage());
         }
 
         // end of details
@@ -230,6 +261,9 @@ public class LegislatorDetailsPage extends AppCompatActivity {
                 String chamber = "NA";
                 if (jsonObject.has("chamber")) {
                     chamber = jsonObject.getString("chamber");
+                    String temp = chamber.substring(0,1).toUpperCase();
+                    temp += chamber.substring(1);
+                    chamber = temp;
                 }
 
                 String contact = "NA";
@@ -273,6 +307,9 @@ public class LegislatorDetailsPage extends AppCompatActivity {
                 String fax = "NA";
                 if (jsonObject.has("fax")) {
                     fax = jsonObject.getString("fax");
+                    if(fax.equals("null")){
+                        fax = "NA";
+                    }
                 }
 
                 Date bDay = null;

@@ -4,19 +4,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/legs"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@mipmap/legislator"
             android:title="Legislators" />
         <item
             android:id="@+id/bills"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@mipmap/bills"
             android:title="Bills" />
         <item
             android:id="@+id/comm"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@mipmap/committee"
             android:title="Committees" />
         <item
             android:id="@+id/fav"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@mipmap/fav"
             android:title="Favorites" />
     </group>
 

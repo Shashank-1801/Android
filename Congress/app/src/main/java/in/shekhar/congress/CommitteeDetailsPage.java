@@ -41,6 +41,12 @@ public class CommitteeDetailsPage extends AppCompatActivity {
         try {
 
             final ImageView favImg = (ImageView) findViewById(R.id.committeeFavoritesIcon);
+            SharedPreferences.Editor editor = sp.edit();
+            if(sp.contains(id)){
+                favImg.setImageResource(R.mipmap.star_yellow );
+            }else{
+                favImg.setImageResource(R.mipmap.star_blank);
+            }
             favImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -57,6 +63,7 @@ public class CommitteeDetailsPage extends AppCompatActivity {
                             editor.commit();
                             Toast.makeText(CommitteeDetailsPage.this, "Was already saved, removed it", Toast.LENGTH_SHORT).show();
                             favImg.setImageResource(R.mipmap.star_blank);
+                            Favorites.loadPageContents();
                         }else{
                             // not saved... save the data
                             editor.putString(id, info);
@@ -64,6 +71,7 @@ public class CommitteeDetailsPage extends AppCompatActivity {
                             Toast.makeText(CommitteeDetailsPage.this, "Saved", Toast.LENGTH_SHORT).show();
                             Log.d("", "Information Saved : " + info);
                             favImg.setImageResource(R.mipmap.star_yellow);
+                            Favorites.loadPageContents();
                         }
 
                     }catch (Exception e){
@@ -88,6 +96,9 @@ public class CommitteeDetailsPage extends AppCompatActivity {
             String chamber = "NA";
             if(jsonObject.has("chamber")){
                 chamber = jsonObject.getString("chamber");
+                String temp = chamber.substring(0,1).toUpperCase();
+                temp += chamber.substring(1);
+                chamber = temp;
             }
 
 

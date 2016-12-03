@@ -36,14 +36,26 @@
                         android:id="@+id/tab1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <ListView
+                            android:layout_weight="10"
                             android:id="@+id/favoritesListViewLegislators"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
                         </ListView>
+                        <LinearLayout
+                            android:id="@+id/favoritesListViewLegislatorsIndex"
+                            android:layout_weight="1"
+                            android:layout_width="30dp"
+                            android:padding="5dp"
+                            android:background="@color/indexColor"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center_vertical|center_horizontal">
+
+                        </LinearLayout>
 
                     </LinearLayout>
 

@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AboutMe" />
+        <activity android:name=".AboutMe"
+            android:label="About Me"/>
         <activity
             android:name=".LegislatorDetailsPage"
             android:label="@string/title_activity_details_page"

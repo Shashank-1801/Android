@@ -72,8 +72,12 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
                 JSONObject jsonString = new JSONObject(strings);
 
                 JSONArray jArray = jsonString.getJSONArray("results");
-
-                JSONArray sorted = sortList(jArray, "introduced_on");
+                JSONArray sorted;
+                if(indexerID == 0) {
+                    sorted = sortList(jArray, "introduced_on", true);
+                }else{
+                    sorted = sortList(jArray, "introduced_on", false);
+                }
                 list = new ArrayList<>();
                 for (int i = 0; i < jArray.length(); i++) {
                     list.add(sorted.getString(i));
@@ -89,7 +93,7 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
                 JSONObject jsonString = new JSONObject(strings);
                 JSONArray jArray = jsonString.getJSONArray("results");
 
-                JSONArray sorted = sortList(jArray, "name");
+                JSONArray sorted = sortList(jArray, "name", true);
                 list = new ArrayList<>();
                 for (int i = 0; i < jArray.length(); i++) {
                     list.add(sorted.getString(i));
@@ -105,7 +109,12 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
                 JSONObject jsonString = new JSONObject(strings);
                 JSONArray jArray = jsonString.getJSONArray("results");
 
-                JSONArray sorted = sortList(jArray, "last_name");
+                JSONArray sorted;
+                if(indexerID == R.id.legislatorsIndexState){
+                    sorted = sortList(jArray, "state_name", true);
+                }else{
+                    sorted = sortList(jArray, "last_name", true);
+                }
                 list = new ArrayList<>();
                 for (int i = 0; i < jArray.length(); i++) {
                     list.add(sorted.getString(i));
@@ -113,8 +122,14 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
 
 
                 ArrayList<String> names = new ArrayList<>();
-                for(int i=0; i<sorted.length(); i++){
-                    names.add(sorted.getJSONObject(i).getString("last_name"));
+                if(indexerID == R.id.legislatorsIndexState){
+                    for(int i=0; i<sorted.length(); i++){
+                        names.add(sorted.getJSONObject(i).getString("state_name"));
+                    }
+                }else {
+                    for (int i = 0; i < sorted.length(); i++) {
+                        names.add(sorted.getJSONObject(i).getString("last_name"));
+                    }
                 }
 
                 final Map<String, Integer> indexMap = new LinkedHashMap();
@@ -208,13 +223,13 @@ public class AsyncTaskActivity extends AsyncTask<Void, Void, String> {
     }
 
 
-    public JSONArray sortList(JSONArray jArray, String tag){
+    public JSONArray sortList(JSONArray jArray, String tag, boolean asc){
         try {
             ArrayList<JSONObject> listJson = new ArrayList<>();
             for (int i = 0; i < jArray.length(); i++) {
                 listJson.add(jArray.getJSONObject(i));
             }
-            Collections.sort(listJson, new JsonComp(tag));
+            Collections.sort(listJson, new JsonComp(tag,asc));
 
             JSONArray x = new JSONArray();
             for (int i = 0; i < listJson.size(); i++) {
